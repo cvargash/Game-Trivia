@@ -1,8 +1,22 @@
-<h1>Trivia</h1>
-
-<h2>Ingresa tu nombre</h2>
-
-<div>
-    <input type="text" [(ngModel)]="userName">
-    <button class="btn-secondary" (click)="onUserNameCreate()">Aceptar</button>
+<div class="container-fluid pt-5">
+    <div class="row">
+        <div class="col container">
+            <h1>Trivia</h1>
+        </div>
+    </div>
+    <div class="row data-row">
+        <div class="col container">
+            <div>
+                <h2>Ingresa tu nombre</h2>
+            </div>
+            <div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">@</span>
+                    <input [(ngModel)]="userName" type="text" class="form-control" placeholder="Username"
+                        aria-label="Username" aria-describedby="basic-addon1">
+                    <button class="accept-button" (click)="onUserNameCreate()">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

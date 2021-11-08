@@ -8,6 +8,8 @@ import { AnswerButtonComponent } from './answer-button/answer-button.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { GamePageComponent } from './game-page/game-page.component';
 import { ScorePageComponent } from './score-page/score-page.component';
+import { OptionButtonComponent } from './option-button/option-button.component';
+import { TitleComponent } from './title/title.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { ScorePageComponent } from './score-page/score-page.component';
     AnswerButtonComponent,
     LoginPageComponent,
     GamePageComponent,
-    ScorePageComponent
+    ScorePageComponent,
+    OptionButtonComponent,
+    TitleComponent
   ],
   imports: [
     BrowserModule,

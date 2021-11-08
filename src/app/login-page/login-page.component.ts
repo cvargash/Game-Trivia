@@ -16,8 +16,11 @@ export class LoginPageComponent implements OnInit{
     this.router = router
   }
 
-  ngOnInit(){
-    this.isLoggedIn()
+  ngOnInit(): void{
+    const isLogin: boolean = this.userService.checkLoginUser()
+    if (isLogin == true){
+      this.router.navigateByUrl('/game')
+    }
   }
 
   userName = ""
