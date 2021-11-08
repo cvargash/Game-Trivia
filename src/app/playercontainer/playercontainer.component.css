@@ -1,0 +1,14 @@
+.button-container{
+    color: white;
+    background-color: #216FB7;
+    width: 300px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 20px;
+    margin-left: 60px;
+}

@@ -10,6 +10,7 @@ import { GamePageComponent } from './game-page/game-page.component';
 import { ScorePageComponent } from './score-page/score-page.component';
 import { OptionButtonComponent } from './option-button/option-button.component';
 import { TitleComponent } from './title/title.component';
+import { PlayercontainerComponent } from './playercontainer/playercontainer.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { TitleComponent } from './title/title.component';
     GamePageComponent,
     ScorePageComponent,
     OptionButtonComponent,
-    TitleComponent
+    TitleComponent,
+    PlayercontainerComponent
   ],
   imports: [
     BrowserModule,

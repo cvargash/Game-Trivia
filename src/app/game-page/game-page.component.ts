@@ -13,6 +13,7 @@ export class GamePageComponent implements OnInit {
   userService:UserService
   router: Router
   gameService:GameService
+  correctAnswer:number=-1
   constructor(service: UserService, router:Router, gameService:GameService) {
     this.userService = service
     this.router = router
@@ -29,10 +30,19 @@ export class GamePageComponent implements OnInit {
 
   selectAnswer(answer:string){
     console.log(answer)
+    if(answer==this.gameService.correctAnswer){
+      this.correctAnswer=1
+    }else{
+      this.correctAnswer = 0
+    }
 
   }
 
-  gotoLeaderBoard(){
+  nextQuestion(){
+    this.correctAnswer=-1
+  }
 
+  gotoLeaderBoard(){
+    this.router.navigateByUrl('/score')
   }
 }

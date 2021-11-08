@@ -1,5 +1,5 @@
 :host {
-    background-color: #c95e5e !important;
+    background-color: #db6719 !important;
     display: block;
 }
 
@@ -13,10 +13,28 @@
     padding-top: 100px;
 }
 
+img{
+    width: 100px;
+    height: 100px;
+}
+
+.imgQuestion{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3px;
+}
+
 .option-container{
     display: flex;
     flex-direction: column;
     gap: 10px;
     align-items: center;
+}
+
+.button-next{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
