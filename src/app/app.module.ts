@@ -11,7 +11,7 @@ import { ScorePageComponent } from './score-page/score-page.component';
 import { OptionButtonComponent } from './option-button/option-button.component';
 import { TitleComponent } from './title/title.component';
 import { PlayercontainerComponent } from './playercontainer/playercontainer.component';
-
+import { HttpClientModule} from '@angular/common/http'
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +26,8 @@ import { PlayercontainerComponent } from './playercontainer/playercontainer.comp
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

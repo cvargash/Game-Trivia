@@ -24,20 +24,20 @@ export class LoginPageComponent implements OnInit{
   }
 
   userName = ""
-
+  userPassword = ""
   onUserNameCreate(){
-    if (this.userName === ""){
-      alert("El nombre no debe estar vacio.")
+    if (this.userName === "" || this.userPassword==""){
+      alert("El nombre y password no debe estar vacio.")
       return
     }
-    this.userService.createUserName(this.userName)
+    this.userService.createUserName(this.userName, this.userPassword)
     this.router.navigateByUrl('/game')
   }
 
   isLoggedIn(){
     const userName = localStorage.getItem("userName")
     if (userName != null){
-      this.userService.createUserName(this.userName)
+     // this.userService.createUserName(this.userName)
       this.router.navigateByUrl('/game')
     }
   }
