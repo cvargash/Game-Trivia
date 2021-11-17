@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ApiResponse } from './api-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -7,34 +8,52 @@ import { HttpClient } from '@angular/common/http';
 export class UserService {
 
   userName: string = ""
+  token: string = ""
   httpClient:HttpClient
   constructor(httpClient:HttpClient) {
     this.httpClient = httpClient
    }
 
-  createRegisterRequest(name: string, password:string){
-    this.httpClient.post("http://localhost:4035/players/register",{name,password}).subscribe((data:any)=>{
-      console.log(data)
-    })
+  async createRegisterRequest(name: string, password:string):Promise<ApiResponse>{
+    const data= await this.httpClient.post("http://localhost:4035/players/register",{name,password}).toPromise()
+    const json=JSON.parse(JSON.stringify(data))
+    return {status:json["status"],message:json["message"],data:json["data"]}
   }
 
-  createUserName(name: string, password:string){
-    this.userName = name
-    this.createRegisterRequest(name, password)
-    console.log("Aqui cambio", this.userName)
-    localStorage.setItem("userName", this.userName)
+  async createloginRequest(name: string, password:string):Promise<ApiResponse>{
+    const data= await this.httpClient.post("http://localhost:4035/players/login",{name,password}).toPromise();
+    const json = JSON.parse(JSON.stringify(data))
+    console.log({status:json["status"],message:json["message"],data:json["data"]})
+    return {status:json["status"],message:json["message"],data:json["data"]}
   }
 
-  checkLoginUser():boolean{
-    const name = localStorage.getItem("userName")
-    if (name != null){
-      this.userName = name
-      return true
+  checkLoginUser(): boolean{
+    const userName = localStorage.getItem("userName")
+    const token = localStorage.getItem("token")
+    if(userName != null && token != null){
+      this.userName = userName
+      this.token = token
+            return true
     }
-    else{
+    return false
+  }
+
+  async createUserName(name: string, password:string):Promise<boolean>{
+    const registerResponse: ApiResponse = await this.createRegisterRequest(name, password)
+    if (registerResponse.status == false){
+      const loginResponse = await this.createRegisterRequest(name, password)
+      if(loginResponse.status == true){
+        localStorage.setItem("userName",name)
+        localStorage.setItem("token", loginResponse.data.token)
+        return true
+      }
       return false
     }
+    localStorage.setItem("userName",name)
+    localStorage.setItem("token", registerResponse.data.token)
+    return true
   }
+
 
   signOut(){
     this.userName = ""

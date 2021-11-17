@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { UserService } from './user.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +17,11 @@ export class GameService {
   ]
 
   correctAnswer:string ="Opcion 3"
-
-  constructor() { }
+  userService:UserService
+  constructor(userService:UserService) {
+    this.userService = userService
+  }
+    async getTriviaQuestion(){
+      
+  }
 }
