@@ -22,6 +22,7 @@ export class GamePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.checkLoginUser()
+    this.gameService.setNewTriviaQuestion()
   }
 
   signOut(){
@@ -37,6 +38,9 @@ export class GamePageComponent implements OnInit {
       this.correctAnswer = 0
     }
     this.gameService.sendUserResponse(this.gameService.currentQuestion, answer)
+    setTimeout(()=>{
+      this.nextQuestion()
+    },1000)
   }
 
   nextQuestion(){
