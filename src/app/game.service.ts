@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UserService } from './user.service';
-
+import { HttpClient } from '@angular/common/http';
+import { ApiResponse } from './api-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,10 +19,35 @@ export class GameService {
 
   correctAnswer:string ="Opcion 3"
   userService:UserService
-  constructor(userService:UserService) {
+  httpClient:HttpClient
+  constructor(userService:UserService, httpClient:HttpClient) {
     this.userService = userService
+    this.httpClient = httpClient
   }
-    async getTriviaQuestion(){
-      
-  }
+    async getTriviaQuestion():Promise<ApiResponse>{
+      const data= await this.httpClient.get("http://localhost:4035/questions/single",{headers:{user:this.userService.userName ,"access-token":this.userService.token}}).toPromise()
+        const response = JSON.parse(JSON.stringify(data))
+        return {status:response.status, message:response.message, data:response.data}
+    }
+    async setNewTriviaQuestion(){
+      const response = await this.getTriviaQuestion()
+      console.log(response)
+      this.currentQuestion = response.data.question.question 
+      this.answerOptions = response.data.question.answers 
+      this.correctAnswer = response.data.question.correctAnswer 
+    }
+
+    sendUserResponse(question:string, answer:string){
+      this.httpClient.post("http://localhost:4035/questions/response",
+      {
+        question:question,
+        answer:answer
+      },
+      {
+        headers:{
+          user:this.userService.userName,
+        "access-token":this.userService.token
+          }
+      }).toPromise()      
+    }
 }

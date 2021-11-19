@@ -27,10 +27,10 @@ export class UserService {
     return {status:json["status"],message:json["message"],data:json["data"]}
   }
 
-  checkLoginUser(): boolean{
+  checkLoginUser(){
     const userName = localStorage.getItem("userName")
     const token = localStorage.getItem("token")
-    if(userName != null && token != null){
+    if(userName != null  && token != null){
       this.userName = userName
       this.token = token
             return true
@@ -45,12 +45,16 @@ export class UserService {
       if(loginResponse.status == true){
         localStorage.setItem("userName",name)
         localStorage.setItem("token", loginResponse.data.token)
+        this.userName = name
+        this.token = loginResponse.data.token
         return true
       }
       return false
     }
     localStorage.setItem("userName",name)
     localStorage.setItem("token", registerResponse.data.token)
+    this.userName = name
+    this.token = registerResponse.data.token
     return true
   }
 
